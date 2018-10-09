@@ -1,6 +1,6 @@
 <template>
     <div class="icons">
-        <swiper>
+        <swiper :options="swiperOption">
             <swiper-slide v-for="(page, index) in pages" :key="index">
                 <div class="icon" v-for="item in page" :key="item.id">
                     <div class="icon-img">
@@ -16,58 +16,64 @@
 <script>
 export default {
     neme: 'HomeIcons',
+    props: {
+        list: Array
+    },
     data () {
         return {
-            iconList: [{
-                swiperOption: {
-                    pagination: '.swiper-pagination',
-                },
-                id: '001',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-                desc: '景点门票'
-            },{
-                id: '002',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png',
-                desc: '广州必游'
-            },{
-                id: '003',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/76/eb88861d78fb9902.png',
-                desc: '动植物园'
-            },{
-                id: '004',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/8246f27355943202.png',
-                desc: '游乐场'
-            },{
-                id: '005',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/89/55083b0f1951f302.png',
-                desc: '两江夜游'
-            },{
-                id: '006',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/3e/86314b2af03b7502.png',
-                desc: '水上乐园'
-            },{
-                id: '007',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
-                desc: '一日游'
-            },{
-                id: '008',
-                imgUrl: 'https://img1.qunarzz.com/piao/fusion/1803/20/831d62d2e1c7be02.png',
-                desc: '打卡圣地'
-            },{
-                id: '009',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/b1/528a9e80403b8c02.png',
-                desc: '玩转长隆'
-            },{
-                id: '010',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/80/416c6ab3368d1f02.png',
-                desc: '全部玩乐'
-            }]
+            swiperOption: { // 解决自动轮播问题
+                autoplay: false
+            }
+    //         iconList: [{
+    //             swiperOption: {
+    //                 pagination: '.swiper-pagination',
+    //             },
+    //             id: '001',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
+    //             desc: '景点门票'
+    //         },{
+    //             id: '002',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png',
+    //             desc: '广州必游'
+    //         },{
+    //             id: '003',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/76/eb88861d78fb9902.png',
+    //             desc: '动植物园'
+    //         },{
+    //             id: '004',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/8246f27355943202.png',
+    //             desc: '游乐场'
+    //         },{
+    //             id: '005',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/89/55083b0f1951f302.png',
+    //             desc: '两江夜游'
+    //         },{
+    //             id: '006',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/3e/86314b2af03b7502.png',
+    //             desc: '水上乐园'
+    //         },{
+    //             id: '007',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
+    //             desc: '一日游'
+    //         },{
+    //             id: '008',
+    //             imgUrl: 'https://img1.qunarzz.com/piao/fusion/1803/20/831d62d2e1c7be02.png',
+    //             desc: '打卡圣地'
+    //         },{
+    //             id: '009',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/b1/528a9e80403b8c02.png',
+    //             desc: '玩转长隆'
+    //         },{
+    //             id: '010',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/80/416c6ab3368d1f02.png',
+    //             desc: '全部玩乐'
+    //         }]
         }
     },
     computed:{  // 将数组拆分成一个二维数组
         pages () {
             const pages = []
-            this.iconList.forEach((item, index) => {
+            this.list.forEach((item, index) => {
                 const page = Math.floor(index / 8)
                 if (!pages[page]) {
                     pages[page] = []

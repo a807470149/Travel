@@ -19,6 +19,9 @@ export default {
     data () {
         return {
             iconList: [{
+                swiperOption: {
+                    pagination: '.swiper-pagination',
+                },
                 id: '001',
                 imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
                 desc: '景点门票'

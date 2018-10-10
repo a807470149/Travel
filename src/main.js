@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import router from './router.js'
 // 300毫秒点击延迟解决方案
 import fastClick from 'fastclick'
 // 轮播图插件
@@ -16,5 +17,6 @@ fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
 
 new Vue({
+  router,
   render: h => h(App)
 }).$mount('#app')

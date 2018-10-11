@@ -5,6 +5,8 @@ import router from './router.js'
 import fastClick from 'fastclick'
 // 轮播图插件
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+
+import store from './store/'
 // 统一不同浏览器的默认样式
 import './assets/styles/reset.css'
 // 1像素边框解决方案
@@ -18,5 +20,6 @@ Vue.use(VueAwesomeSwiper)
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

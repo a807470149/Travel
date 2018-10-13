@@ -43,89 +43,107 @@
 </template>
 
 <script>
-import Bscroll from 'better-scroll'
-import { mapState, mapMutations } from 'vuex'
+import Bscroll from "better-scroll";
+import { mapState, mapMutations } from "vuex";
 
 export default {
-    name: 'CityList',
-    props: {
-        cities: Object,
-		hotCities: Array,
-        letter: String,
+  name: "CityList",
+  props: {
+    cities: Object,
+    hotCities: Array,
+    letter: String
+  },
+  computed: {
+    ...mapState({
+      currentCity: "city"
+    })
+  },
+  methods: {
+    handleCityClick(city) {
+      // this.$store.commit('changeCity', city)
+      this.changeCity(city);
+      this.$router.push("/");
     },
-    computed: {
-        ...mapState({
-            currentCity: 'city'
-        })
-    },
-    methods: {
-        handleCityClick (city) {
-            // this.$store.commit('changeCity', city)
-            this.changeCity(city)
-            this.$router.push('/')
-        },
-        ...mapMutations(['changeCity'])
-    },
-    mounted () {
-        this.scroll = new Bscroll(this.$refs.wrapper)
-	},
-	watch: {
-		letter () {
-			if (this.letter) {
-				const element = this.$refs[this.letter][0]
-				this.scroll.scrollToElement(element)
-			}
-		}
-    },  
-}
+    ...mapMutations(["changeCity"])
+  },
+  mounted() {
+    const options = {
+      // 处理在better-scroll在安卓手机上不能点击的问题
+      click: true,
+      tap: true
+    };
+    this.scroll = new Bscroll(this.$refs.wrapper, options);
+  },
+  watch: {
+    letter() {
+      if (this.letter) {
+        const element = this.$refs[this.letter][0];
+        this.scroll.scrollToElement(element);
+      }
+    }
+  }
+};
 </script>
 
 <style lang="stylus" scoped>
-     @import '~@/assets/styles/varibles.styl'
-     .border-topbottom
-        &:before
-            border-color: #ccc
-        &:after
-            border-color: #ccc
-    .border-bottom
-        &:before
-            border-color: #ccc
+@import '~@/assets/styles/varibles.styl';
 
-    .list
-        overflow: hidden
-        position: absolute
-        top: 1.58rem
-        left: 0
-        right: 0
-        bottom: 0
+.border-topbottom {
+  &:before {
+    border-color: #ccc;
+  }
 
-        .title
-            line-height: .54rem
-            background: #eee
-            padding-left: .2rem
-            color: #666
-            font-size: .26rem
-        
-        .button-list
-            padding: .1rem .6rem .1rem .1rem
-            overflow: hidden
-            
-            .button-wrapper
-                float: left
-                width: 33.33%
-                .button
-                    margin: .1rem
-                    padding: .1rem 0
-                    text-align: center
-                    border: .02rem solid #ccc
-                    border-radius: .06rem
+  &:after {
+    border-color: #ccc;
+  }
+}
 
-        .item-list
-            .item
-                line-height: .76rem
-                padding-left: .2rem
+.border-bottom {
+  &:before {
+    border-color: #ccc;
+  }
+}
 
+.list {
+  overflow: hidden;
+  position: absolute;
+  top: 1.58rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
+  .title {
+    line-height: 0.54rem;
+    background: #eee;
+    padding-left: 0.2rem;
+    color: #666;
+    font-size: 0.26rem;
+  }
 
+  .button-list {
+    padding: 0.1rem 0.6rem 0.1rem 0.1rem;
+    overflow: hidden;
+
+    .button-wrapper {
+      float: left;
+      width: 33.33%;
+
+      .button {
+        margin: 0.1rem;
+        padding: 0.1rem 0;
+        text-align: center;
+        border: 0.02rem solid #ccc;
+        border-radius: 0.06rem;
+      }
+    }
+  }
+
+  .item-list {
+    .item {
+      line-height: 0.76rem;
+      padding-left: 0.2rem;
+    }
+  }
+}
 </style>
 
